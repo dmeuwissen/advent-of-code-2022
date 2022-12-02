@@ -39,7 +39,9 @@ LOSSES = [
 
 HAND_SCORES = {YourHand.ROCK: 1, YourHand.PAPER: 2, YourHand.SCISSORS: 3}
 
-input = open("input.txt").readlines()
+
+def get_input():
+    return [line.strip() for line in open("input.txt").readlines()]
 
 
 def get_score_outcome(your_hand, other_hand):
@@ -90,21 +92,25 @@ def get_my_hand_for_outcome(outcome, other_hand):
         raise ValueError("Invalid input")
 
 
-# Part 1
-print(sum([get_score(YourHand(hand), OtherHand(other_hand)) for other_hand, hand in
-           [line.strip().split() for line in input]]))
-
-# Part 2
-total_score = 0
-for row in input:
-    other_hand, round_ending = row.strip().split()
-    other_hand = OtherHand(other_hand)
-    round_ending = RoundEnding(round_ending)
-
-    my_hand = get_my_hand_for_outcome(round_ending, other_hand)
-    total_score += get_score(my_hand, other_hand)
-
-print(total_score)
+def part_1(input_text):
+    return sum([get_score(YourHand(hand), OtherHand(other_hand)) for other_hand, hand in
+                [line.strip().split() for line in input_text]])
 
 
+def part_2(input_text):
+    total_score = 0
+    for row in input_text:
+        other_hand, round_ending = row.split()
+        other_hand = OtherHand(other_hand)
+        round_ending = RoundEnding(round_ending)
 
+        my_hand = get_my_hand_for_outcome(round_ending, other_hand)
+        total_score += get_score(my_hand, other_hand)
+
+    return total_score
+
+
+if __name__ == "__main__":
+    input_text = get_input()
+    print("Part 1:", part_1(input_text))
+    print("Part 2:", part_2(input_text))
