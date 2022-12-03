@@ -25,18 +25,6 @@ WINS = [
     (YourHand.SCISSORS, OtherHand.PAPER)
 ]
 
-DRAWS = [
-    (YourHand.ROCK, OtherHand.ROCK),
-    (YourHand.PAPER, OtherHand.PAPER),
-    (YourHand.SCISSORS, OtherHand.SCISSORS)
-]
-
-LOSSES = [
-    (YourHand.ROCK, OtherHand.PAPER),
-    (YourHand.PAPER, OtherHand.SCISSORS),
-    (YourHand.SCISSORS, OtherHand.ROCK)
-]
-
 HAND_SCORES = {YourHand.ROCK: 1, YourHand.PAPER: 2, YourHand.SCISSORS: 3}
 
 
@@ -47,12 +35,9 @@ def get_input():
 def get_score_outcome(your_hand, other_hand):
     if (your_hand, other_hand) in WINS:
         return 6
-    elif (your_hand, other_hand) in DRAWS:
+    if your_hand.name == other_hand.name:
         return 3
-    elif (your_hand, other_hand) in LOSSES:
-        return 0
-    else:
-        raise ValueError("Invalid input")
+    return 0
 
 
 def get_score_hand(your_hand):
@@ -70,15 +55,13 @@ def get_winning_hand(other_hand):
 
 
 def get_losing_hand(other_hand):
-    for hands in LOSSES:
-        if hands[1] == other_hand:
-            return hands[0]
+    for hands in WINS:
+        if hands[0].name == other_hand.name:
+            return hands[1]
 
 
 def get_draw_hand(other_hand):
-    for hands in DRAWS:
-        if hands[1] == other_hand:
-            return hands[0]
+    return YourHand(other_hand.name)
 
 
 def get_my_hand_for_outcome(outcome, other_hand):
