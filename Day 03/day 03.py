@@ -18,7 +18,7 @@ def split_rucksacks_in_groups_of_3(rucksacks):
 
 
 def find_shared_letters_between_list_of_strings(input_list):
-    return set.intersection(*[set(string) for string in input_list])
+    return set.intersection(*[set(s) for s in input_list])
 
 
 input_rucksacks = get_input()
