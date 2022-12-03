@@ -13,10 +13,6 @@ def split_string_in_middle(input_string):
     return input_string[:len(input_string) // 2], input_string[len(input_string) // 2:]
 
 
-def find_letters_in_both_strings(string_1, string_2):
-    return [letter for letter in string_1 if letter in string_2]
-
-
 def split_rucksacks_in_groups_of_3(rucksacks):
     return [rucksacks[i:i + 3] for i in range(0, len(rucksacks), 3)]
 
@@ -31,9 +27,8 @@ input_rucksacks = get_input()
 def part_1(input_rucksacks):
     total_priority = 0
     for rucksack in input_rucksacks:
-        compartment1, compartment2 = split_string_in_middle(rucksack)
-        letters_in_both_rucksacks = set()
-        letters_in_both_rucksacks.update(find_letters_in_both_strings(compartment1, compartment2))
+        compartments = split_string_in_middle(rucksack)
+        letters_in_both_rucksacks = find_shared_letters_between_list_of_strings(compartments)
         for letter in letters_in_both_rucksacks:
             total_priority += get_priority(letter)
     return total_priority
