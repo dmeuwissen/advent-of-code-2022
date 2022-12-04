@@ -44,6 +44,6 @@ def part_2(input_list):
 
 if __name__ == "__main__":
     input_list = get_input()
-    print("Overlapping ranges:", part_1(input_list))
-    print("Overlapping ranges:", part_2(input_list))
+    print("Part 1:", part_1(input_list))
+    print("Part 2:", part_2(input_list))
 
